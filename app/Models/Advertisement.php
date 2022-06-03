@@ -49,4 +49,13 @@ class Advertisement extends Model
     public function scopePublished($query){
         return $query->where('state','2');
     }
+
+    // Functions
+    public function isDraft(){
+        return $this->state == 'draft';
+    }
+
+    public function isPublished(){
+        return $this->state == 'published';
+    }
 }

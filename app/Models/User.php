@@ -80,4 +80,8 @@ class User extends Authenticatable
     public function isOwner($object){
         return $this->id == $object->user_id;
     }
+
+    public function isAdmin(){
+        return $this->role == 'admin';
+    }
 }

@@ -30,7 +30,7 @@ class AdvertisementPolicy
      */
     public function view(User $user, Advertisement $advertisement)
     {
-        //
+        return $advertisement->isPublished()||$user->isOwner($advertisement);
     }
 
     /**
@@ -53,7 +53,7 @@ class AdvertisementPolicy
      */
     public function update(User $user, Advertisement $advertisement)
     {
-        //
+        return $user->isOwner($advertisement);
     }
 
     /**
@@ -65,7 +65,7 @@ class AdvertisementPolicy
      */
     public function delete(User $user, Advertisement $advertisement)
     {
-        //
+        return $user->isOwner($advertisement)||$user->isAdmin();
     }
 
     /**
