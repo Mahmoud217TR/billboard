@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,28 @@ class AdvertisementFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->sentence(),
+            'description' => $this->faker->paragraph(),
+            'state' => 'published',
+            'user_id' => User::factory(),
         ];
+    }
+
+    public function withoutUser()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'user_id' => null,
+            ];
+        });
+    }
+
+    public function draft()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'state' => 'draft',
+            ];
+        });
     }
 }
