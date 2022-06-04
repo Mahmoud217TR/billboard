@@ -15,7 +15,8 @@ class AdvertisementController extends Controller
      */
     public function index()
     {
-        //
+        $advertisements = Advertisement::published()->get();
+        // return view('',compact('advertisements'));
     }
 
     /**
@@ -25,7 +26,7 @@ class AdvertisementController extends Controller
      */
     public function create()
     {
-        //
+        // return view('');
     }
 
     /**
@@ -36,7 +37,8 @@ class AdvertisementController extends Controller
      */
     public function store(StoreAdvertisementRequest $request)
     {
-        //
+        $advertisement = auth()->user()->advertisements()->save(Advertisement::create($request->all()));
+        // return redirect();
     }
 
     /**
@@ -47,7 +49,7 @@ class AdvertisementController extends Controller
      */
     public function show(Advertisement $advertisement)
     {
-        //
+        // return view('',compact('advertisement'));
     }
 
     /**
@@ -58,7 +60,8 @@ class AdvertisementController extends Controller
      */
     public function edit(Advertisement $advertisement)
     {
-        //
+        $this->authorize('update',$advertisement);
+        // return view('',compact('advertisement'));
     }
 
     /**
@@ -70,7 +73,9 @@ class AdvertisementController extends Controller
      */
     public function update(UpdateAdvertisementRequest $request, Advertisement $advertisement)
     {
-        //
+        $this->authorize('update',$advertisement);
+        $advertisement->update($request->all());
+        // return redirect();
     }
 
     /**
@@ -81,6 +86,8 @@ class AdvertisementController extends Controller
      */
     public function destroy(Advertisement $advertisement)
     {
-        //
+        $this->authorize('delete',$advertisement);
+        $advertisement->delete();
+        // return redirect();
     }
 }

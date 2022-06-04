@@ -13,7 +13,7 @@ class UpdateAdvertisementRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -24,7 +24,9 @@ class UpdateAdvertisementRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'nullable|string',
+            'description' => 'nullable|string',
+            'state' => 'nullable',
         ];
     }
 }
