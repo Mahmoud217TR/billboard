@@ -15,8 +15,8 @@ class AdvertisementController extends Controller
      */
     public function index()
     {
-        $advertisements = Advertisement::published()->get();
-        // return view('',compact('advertisements'));
+        $advertisements = Advertisement::published()->paginate(20);
+        return view('advertisement.index',compact('advertisements'));
     }
 
     /**
