@@ -54,7 +54,7 @@ class AdvertisementController extends Controller
      */
     public function show(Advertisement $advertisement)
     {
-        // return view('',compact('advertisement'));
+        return view('advertisement.show',compact('advertisement'));
     }
 
     /**

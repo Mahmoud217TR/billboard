@@ -19,7 +19,7 @@ class AdvertisementFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence(),
-            'description' => $this->faker->paragraph(),
+            'description' => $this->faker->paragraph(10),
             'state' => 'published',
             'user_id' => User::factory(),
         ];
