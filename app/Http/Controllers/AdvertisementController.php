@@ -13,6 +13,7 @@ class AdvertisementController extends Controller
     {
         $this->middleware('auth')->except(['index','show']);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +21,7 @@ class AdvertisementController extends Controller
      */
     public function index()
     {
-        $advertisements = Advertisement::published()->paginate(18);
+        $advertisements = Advertisement::published()->latest()->paginate(18);
         return view('advertisement.index',compact('advertisements'));
     }
 
@@ -31,7 +32,7 @@ class AdvertisementController extends Controller
      */
     public function create()
     {
-        // return view('');
+        return view('advertisement.create',['advertisement'=> new Advertisement,'states' => Advertisement::getStates()]);
     }
 
     /**
@@ -42,8 +43,8 @@ class AdvertisementController extends Controller
      */
     public function store(StoreAdvertisementRequest $request)
     {
-        $advertisement = auth()->user()->advertisements()->save(Advertisement::create($request->all()));
-        // return redirect();
+        $advertisement = auth()->user()->advertisements()->save(new Advertisement($request->all()));
+        return redirect()->route('advertisement.show',$advertisement);
     }
 
     /**
@@ -66,7 +67,7 @@ class AdvertisementController extends Controller
     public function edit(Advertisement $advertisement)
     {
         $this->authorize('update',$advertisement);
-        // return view('',compact('advertisement'));
+        return view('advertisement.edit',['advertisement'=> $advertisement,'states' => Advertisement::getStates()]);
     }
 
     /**
@@ -80,7 +81,7 @@ class AdvertisementController extends Controller
     {
         $this->authorize('update',$advertisement);
         $advertisement->update($request->all());
-        // return redirect();
+        return redirect()->route('advertisement.show',$advertisement);
     }
 
     /**
