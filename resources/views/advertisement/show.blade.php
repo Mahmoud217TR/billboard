@@ -20,7 +20,11 @@
                 <a href="{{ route('advertisement.edit',$advertisement) }}" class="btn btn-success">Edit</a>
             @endcan
             @can('delete',$advertisement)
-                <a href="#" class="btn btn-danger">Delete</a>
+                <form action="{{ route('advertisement.destroy',$advertisement) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger">Delete</button>
+                </form>
             @endcan
         </div>
     </div>

@@ -94,6 +94,6 @@ class AdvertisementController extends Controller
     {
         $this->authorize('delete',$advertisement);
         $advertisement->delete();
-        // return redirect();
+        return redirect()->route('advertisement.index');
     }
 }
