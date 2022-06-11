@@ -32,7 +32,7 @@ class AdvertisementController extends Controller
      */
     public function create()
     {
-        return view('advertisement.create',['advertisement'=> new Advertisement,'states' => Advertisement::getStates()]);
+        return view('advertisement.create',['advertisement'=> new Advertisement]);
     }
 
     /**
@@ -67,7 +67,7 @@ class AdvertisementController extends Controller
     public function edit(Advertisement $advertisement)
     {
         $this->authorize('update',$advertisement);
-        return view('advertisement.edit',['advertisement'=> $advertisement,'states' => Advertisement::getStates()]);
+        return view('advertisement.edit',compact('advertisement'));
     }
 
     /**

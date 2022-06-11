@@ -32,7 +32,7 @@
 <div class="row mb-3">
     <div class="col-md-2">
         <select class="form-select" name="state" id="state">
-            @foreach ($states as $state)
+            @foreach ($advertisement->getStates() as $state)
                 <option value="{{ $state }}" @selected($state==$advertisement->state)>{{ ucfirst($state) }}</option>
             @endforeach
         </select>
