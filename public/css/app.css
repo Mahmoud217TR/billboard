@@ -11291,6 +11291,7 @@ textarea.form-control-lg {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  min-height: 4ch;
 }
 
 .truncate-3-lines {
@@ -11298,4 +11299,5 @@ textarea.form-control-lg {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  min-height: 8ch;
 }
