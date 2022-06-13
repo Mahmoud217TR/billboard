@@ -11,6 +11,15 @@
     </div>
     <div class="row">
         <div class="col">
+            @if ($advertisement->featured)
+                <span class="badge rounded-pill bg-success mb-2">
+                    Featured
+                </span>
+            @endif
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
             <p>{{ $advertisement->description }}</p>
         </div>
     </div>
