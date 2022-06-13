@@ -21,6 +21,7 @@ class AdvertisementFactory extends Factory
             'title' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(10),
             'state' => 'published',
+            'featured' => false,
             'user_id' => User::factory(),
         ];
     }
@@ -39,6 +40,15 @@ class AdvertisementFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'state' => 'draft',
+            ];
+        });
+    }
+
+    public function featured()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'featured' => true,
             ];
         });
     }

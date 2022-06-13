@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('description');
             $table->unsignedInteger('state');
             $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
+            $table->boolean('featured');
             $table->timestamps();
         });
     }

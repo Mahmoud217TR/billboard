@@ -26,5 +26,6 @@ class DatabaseSeeder extends Seeder
         ]);
         // Creating Advertisments with Users
         Advertisement::factory(10)->create();
+        Advertisement::factory(5)->featured()->create();
     }
 }

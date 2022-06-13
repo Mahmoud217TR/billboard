@@ -50,6 +50,18 @@ class Advertisement extends Model
         return $query->where('state','2');
     }
 
+    public function scopeFeatured($query){
+        return $query->where('featured',true);
+    }
+
+    public function scopeUnfeatured($query){
+        return $query->where('featured',false);
+    }
+
+    public function scopeFeaturedFirst($query){
+        return $query->orderBy("featured","DESC");
+    }
+
     // Functions
     public function isDraft(){
         return $this->state == 'draft';
