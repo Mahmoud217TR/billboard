@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col text-center">
+            <div class="col text-center mb-4">
                 <h1 class="display-5 bg-white rounded">Advertisements</h1>
             </div>
         </div>
