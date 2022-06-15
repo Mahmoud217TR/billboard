@@ -5,8 +5,8 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col">
-                <h2>Advertisements:</h2>
+            <div class="col text-center">
+                <h1 class="display-5 bg-white rounded">Advertisements</h1>
             </div>
         </div>
         <div class="row">
@@ -15,24 +15,30 @@
                      @include('advertisement.card')
                 </div>
             @empty
-                <h1>Nothing to Show here.</h1>
+                <div class="col mb-4">
+                    <div class="bg-white rounded p-5 d-flex justify-content-center">
+                        <h1 class="display-5">Nothing to show here.</h1>
+                    </div>
+                </div>
             @endforelse
         </div>
-        <div class="row">
-            <div class="col d-flex justify-content-center">
-                <!-- Previous link -->
-                @if($advertisements->currentPage() > 1)
-                    <a class="btn btn-secondary" href="{{ $advertisements->previousPageUrl() }}">Previous</a>
-                @endif
+        @if ($advertisements->count())
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <!-- Previous link -->
+                    @if($advertisements->currentPage() > 1)
+                        <a class="btn btn-dark" href="{{ $advertisements->previousPageUrl() }}">Previous</a>
+                    @endif
 
-                <!-- Current Page Number -->
-                <span class="d-block bg-dark text-light mx-2 p-2 rounded"> {{ $advertisements->currentPage() }} </span>
+                    <!-- Current Page Number -->
+                    <span class="d-block bg-light mx-2 p-2 rounded"> {{ $advertisements->currentPage() }} </span>
 
-                <!-- Next link -->
-                @if($advertisements->hasMorePages())
-                    <a class="btn btn-secondary" href="{{ $advertisements->nextPageUrl() }}">Next</a>
-                @endif
+                    <!-- Next link -->
+                    @if($advertisements->hasMorePages())
+                        <a class="btn btn-dark" href="{{ $advertisements->nextPageUrl() }}">Next</a>
+                    @endif
+                </div>
             </div>
-        </div>
+        @endif
     </div>
 @endsection
