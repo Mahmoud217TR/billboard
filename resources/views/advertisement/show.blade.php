@@ -42,9 +42,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer d-flex justify-content-between text-muted">
-                    <p class="mb-0">Author: {{ $advertisement->user->name }}</p>
-                    <p class="mb-0">Posted at: {{ $advertisement->created_at }}</p>
+                <div class="card-footer row text-muted">
+                    <p class="col-md mb-0">Author: {{ $advertisement->user->name }}</p>
+                    <p class="col-md mb-0 text-md-end">Posted at: {{ $advertisement->created_at }}</p>
                 </div>
             </div>
         </div>
