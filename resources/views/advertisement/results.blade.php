@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col text-center mb-4">
-                <h1 class="display-5 bg-white rounded">Advertisements</h1>
+                <h1 class="display-5 bg-white rounded">Search Results</h1>
             </div>
         </div>
         @include('advertisement.group')
@@ -15,7 +15,7 @@
                 <div class="col d-flex justify-content-center">
                     <!-- Previous link -->
                     @if($advertisements->currentPage() > 1)
-                        <a class="btn btn-dark" href="{{ $advertisements->previousPageUrl() }}">Previous</a>
+                        <a class="btn btn-dark" href="{{  Request::fullUrl().'&page='.$advertisements->currentPage()-1}}">Previous</a>
                     @endif
 
                     <!-- Current Page Number -->
@@ -23,7 +23,7 @@
 
                     <!-- Next link -->
                     @if($advertisements->hasMorePages())
-                        <a class="btn btn-dark" href="{{ $advertisements->nextPageUrl() }}">Next</a>
+                        <a class="btn btn-dark" href="{{ Request::fullUrl().'&page='.$advertisements->currentPage()+1 }}">Next</a>
                     @endif
                 </div>
             </div>

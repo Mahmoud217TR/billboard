@@ -40,7 +40,6 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <form class="d-flex" action="{{ route('search') }}" method="get">
-                            @csrf
                             <input name="keyword" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" required>
                             <button class="btn btn-dark" type="submit">Search</button>
                         </form>

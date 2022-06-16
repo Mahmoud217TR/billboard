@@ -11,6 +11,6 @@ class SearchController extends Controller
     public function indexSearch(SearchRequest $request){
         $advertisements = Advertisement::featuredFirst()->published()->latest()->where('title','like','%'.$request['keyword'].'%')
         ->orWhere('description','like','%'.$request['keyword'].'%')->paginate(18);
-        return view('advertisement.index',compact('advertisements'));
+        return view('advertisement.results',compact('advertisements'));
     }
 }
