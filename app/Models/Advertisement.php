@@ -19,6 +19,7 @@ class Advertisement extends Model
 
     protected $attributes = [
         'state' => 1,
+        'featured' => false,
     ];
 
     public static function getStates(){
