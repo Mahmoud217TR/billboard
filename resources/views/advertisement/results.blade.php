@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col text-center mb-4">
-                <h1 class="display-5 bg-white rounded">Search Results</h1>
+                <h1 class="display-5 bg-white rounded p-4">Search Results</h1>
             </div>
         </div>
         @include('advertisement.group')
