@@ -8,6 +8,11 @@ use App\Http\Requests\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth','admin'])->except(['index','show']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +30,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create', Category::class);
+        return view('categories.create',['category' => new Category]);
     }
 
     /**
@@ -36,7 +42,8 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        $category = Category::create($request->all());
+        return $category;
     }
 
     /**
@@ -58,7 +65,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $this->authorize('update',$category);
+        return view('categories.edit',compact('category'));
     }
 
     /**
@@ -70,7 +78,9 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $this->authorize('update',$category);
+        $category->update($request->all());
+        return $category;
     }
 
     /**

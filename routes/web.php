@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdvertisementController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,7 @@ Route::get('/billboard', [AdvertisementController::class,'index'])->name('billbo
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::resource('advertisement', AdvertisementController::class);
-
 Route::get('/search', [SearchController::class,'indexSearch'])->name('search');
+
+Route::resource('advertisement', AdvertisementController::class);
+Route::resource('category', CategoryController::class);
