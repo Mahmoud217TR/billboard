@@ -70,11 +70,15 @@ class Advertisement extends Model
     }
 
     public function scopeCategorized($query){
-        return $query->WhereNotNull("category_id");
+        return $query->whereNotNull("category_id");
     }
 
     public function scopeUncategorized($query){
-        return $query->WhereNull("category_id");
+        return $query->whereNull("category_id");
+    }
+
+    public function scopeInCategory($query, $category){
+        return $query->where("category_id","=",$category->id);
     }
 
     // Functions

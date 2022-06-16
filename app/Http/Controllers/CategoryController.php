@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Models\Advertisement;
 
 class CategoryController extends Controller
 {
@@ -43,7 +44,7 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         $category = Category::create($request->all());
-        return $category;
+        return redirect()->route('category.show',$category);
     }
 
     /**
@@ -54,7 +55,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $advertisements = Advertisement::inCategory($category)->featuredFirst()->latest()->paginate(9);
+        return view('categories.show',compact('category','advertisements'));
     }
 
     /**
@@ -80,7 +82,7 @@ class CategoryController extends Controller
     {
         $this->authorize('update',$category);
         $category->update($request->all());
-        return $category;
+        return redirect()->route('category.show',$category);
     }
 
     /**
