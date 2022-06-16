@@ -15,11 +15,13 @@ class Advertisement extends Model
         'description',
         'state',
         'user_id',
+        'category_id',
     ];
 
     protected $attributes = [
         'state' => 1,
         'featured' => false,
+        'category_id' => null,
     ];
 
     public static function getStates(){
@@ -40,6 +42,10 @@ class Advertisement extends Model
     // Relations
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function category(){
+        return $this->belongsTo(Category::class);
     }
 
     // Scopes
@@ -63,6 +69,14 @@ class Advertisement extends Model
         return $query->orderBy("featured","DESC");
     }
 
+    public function scopeCategorized($query){
+        return $query->WhereNotNull("category_id");
+    }
+
+    public function scopeUncategorized($query){
+        return $query->WhereNull("category_id");
+    }
+
     // Functions
     public function isDraft(){
         return $this->state == 'draft';
@@ -70,5 +84,12 @@ class Advertisement extends Model
 
     public function isPublished(){
         return $this->state == 'published';
+    }
+
+    public function getCategory(){
+        if($this->category){
+            return $this->category->name;
+        }
+        return "Uncategorized";
     }
 }

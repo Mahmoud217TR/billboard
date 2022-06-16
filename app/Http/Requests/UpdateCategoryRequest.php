@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAdvertisementRequest extends FormRequest
+class UpdateCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UpdateAdvertisementRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check();
+        return auth()->user()->isAdmin();
     }
 
     /**
@@ -21,13 +21,11 @@ class UpdateAdvertisementRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules($id)
     {
         return [
-            'title' => 'nullable|string',
-            'description' => 'nullable|string',
-            'state' => 'nullable',
-            'category_id' => 'nullable|numeric|exists:categories,id',
+            'title' => 'required|unique:categories,title,except,'.$id,
+            'description' => 'required|string',
         ];
     }
 }

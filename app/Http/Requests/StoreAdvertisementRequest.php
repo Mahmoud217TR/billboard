@@ -27,6 +27,7 @@ class StoreAdvertisementRequest extends FormRequest
             'title' => 'required|string',
             'description' => 'required|string',
             'state' => 'required',
+            'category_id' => 'nullable|numeric|exists:categories,id',
         ];
     }
 }

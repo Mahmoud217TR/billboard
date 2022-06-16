@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAdvertisementRequest extends FormRequest
+class StoreCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UpdateAdvertisementRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check();
+        return auth()->user()->isAdmin();
     }
 
     /**
@@ -24,10 +24,8 @@ class UpdateAdvertisementRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'nullable|string',
-            'description' => 'nullable|string',
-            'state' => 'nullable',
-            'category_id' => 'nullable|numeric|exists:categories,id',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
         ];
     }
 }

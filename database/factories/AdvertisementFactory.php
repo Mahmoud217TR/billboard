@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,6 +24,7 @@ class AdvertisementFactory extends Factory
             'state' => 'published',
             'featured' => false,
             'user_id' => User::factory(),
+            'category_id' => null,
         ];
     }
 
@@ -31,6 +33,15 @@ class AdvertisementFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'user_id' => null,
+            ];
+        });
+    }
+
+    public function withCategory()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'category_id' => Category::factory(),
             ];
         });
     }
