@@ -6,16 +6,22 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <h1>Create a new Advertisement</h1>
-            <form action="{{ route('advertisement.store') }}" method="post">
-                @csrf
-                @include('advertisement.form')
-                <div class="row">
-                    <div class="col">
-                        <button class="btn btn-primary">Create</button>
-                    </div>
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title mb-0">Create a new Advertisement</h1>
                 </div>
-            </form>
+                <div class="card-body">
+                    <form action="{{ route('advertisement.store') }}" method="post">
+                        @csrf
+                        @include('advertisement.form')
+                        <div class="row">
+                            <div class="col-md-6 offset-md-4">
+                                <button class="btn btn-dark">Create</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

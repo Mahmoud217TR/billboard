@@ -6,17 +6,23 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <h1>Edit an Advertisement</h1>
-            <form action="{{ route('advertisement.update',$advertisement) }}" method="post">
-                @csrf
-                @method('patch')
-                @include('advertisement.form')
-                <div class="row">
-                    <div class="col">
-                        <button class="btn btn-primary">Update</button>
-                    </div>
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">Edit an Advertisement</h1>
                 </div>
-            </form>
+                <div class="card-body">
+                    <form action="{{ route('advertisement.update',$advertisement) }}" method="post">
+                        @csrf
+                        @method('patch')
+                        @include('advertisement.form')
+                        <div class="row">
+                            <div class="col-md-6 offset-md-4">
+                                <button class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

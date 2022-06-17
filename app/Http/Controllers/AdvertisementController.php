@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Advertisement;
 use App\Http\Requests\StoreAdvertisementRequest;
 use App\Http\Requests\UpdateAdvertisementRequest;
+use App\Models\Category;
 
 class AdvertisementController extends Controller
 {
@@ -38,7 +39,9 @@ class AdvertisementController extends Controller
      */
     public function create()
     {
-        return view('advertisement.create',['advertisement'=> new Advertisement]);
+        $advertisement= new Advertisement;
+        $categories = Category::all();
+        return view('advertisement.create',compact('advertisement','categories'));
     }
 
     /**
@@ -74,7 +77,8 @@ class AdvertisementController extends Controller
     public function edit(Advertisement $advertisement)
     {
         $this->authorize('update',$advertisement);
-        return view('advertisement.edit',compact('advertisement'));
+        $categories = Category::all();
+        return view('advertisement.edit',compact('advertisement','categories'));
     }
 
     /**

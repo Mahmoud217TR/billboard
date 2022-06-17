@@ -1,7 +1,5 @@
-<div class="row">
-    <label class="col col-form-label" for="title">Title:</label>
-</div>
 <div class="row mb-3">
+    <label class="col-md-4 col-form-label text-end" for="title">Title:</label>
     <div class="col-md-6">
         <input class="form-control @error('title') is-invalid @enderror" type="text"
         id='title' name="title" value="{{ old('title')??$advertisement->title }}">
@@ -12,10 +10,8 @@
         @enderror
     </div>
 </div>
-<div class="row">
-    <label class="col col-form-label" for="description">Description:</label>
-</div>
 <div class="row mb-3">
+    <label class="col-md-4 col-form-label text-end" for="description">Description:</label>
     <div class="col-md-6">
         <textarea class="form-control @error('description') is-invalid @enderror"
         type="text" id='description' name="description" cols='40' rows='10' style="resize: none">{{ old('description')??$advertisement->description }}</textarea>
@@ -26,10 +22,8 @@
         @enderror
     </div>
 </div>
-<div class="row">
-    <label class="col col-form-label" for="state">State:</label>
-</div>
 <div class="row mb-3">
+    <label class="col-md-4 col-form-label text-end" for="state">State:</label>
     <div class="col-md-2">
         <select class="form-select" name="state" id="state">
             @foreach ($advertisement->getStates() as $state)
@@ -37,6 +31,22 @@
             @endforeach
         </select>
         @error('description')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+<div class="row mb-3">
+    <label class="col-md-4 col-form-label text-end" for="category_id">Category:</label>
+    <div class="col-md-4">
+        <select class="form-select" name="category_id" id="category_id">
+            <option value="{{ null }}" @selected($advertisement->category == null)>Uncategorized</option>
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}" @selected($category == $advertisement->category)>{{ ucfirst($category->name) }}</option>
+            @endforeach
+        </select>
+        @error('category_id')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
