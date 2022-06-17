@@ -1,4 +1,4 @@
-<a href="#" class="unstyled">
+<a href="{{ route('category.show',$advertisement->category) }}" class="unstyled">
     <span class="badge rounded-pill bg-primary mb-2">
         {{ $advertisement->getCategory() }}
     </span>

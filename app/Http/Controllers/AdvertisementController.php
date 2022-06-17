@@ -21,7 +21,8 @@ class AdvertisementController extends Controller
      */
     public function index()
     {
-        $advertisements = Advertisement::featuredFirst()->published()->latest()->with(['user'])->paginate(18);
+        $advertisements = Advertisement::featuredFirst()->published()->latest()
+        ->with(['category'])->paginate(18);
         return view('advertisement.index',compact('advertisements'));
     }
 
@@ -55,6 +56,7 @@ class AdvertisementController extends Controller
      */
     public function show(Advertisement $advertisement)
     {
+        $advertisement->with(['user','category']);
         return view('advertisement.show',compact('advertisement'));
     }
 
