@@ -18,4 +18,13 @@ class Category extends Model
     public function advertisements(){
         return $this->hasMany(Advertisement::class);
     }
+
+    // Functions 
+    public function getDescriptionSummary(){
+        $len = strlen($this->description);
+        if($len > 50){
+            return substr($this->description,50,$len);
+        }
+        return $this->description;
+    }
 }

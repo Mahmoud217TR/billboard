@@ -21,7 +21,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::withCount('advertisements')->orderBy('name')->paginate(30);
+        return view('categories.index',compact('categories'));
     }
 
     /**
