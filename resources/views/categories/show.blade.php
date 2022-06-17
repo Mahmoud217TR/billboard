@@ -14,6 +14,7 @@
                         <p class="card-content">
                             {{ $category->description }}
                         </p>
+                        @include('categories.controls')
                     </div>
                     <div class="card-footer">
                         <p class="mb-0 text-muted">

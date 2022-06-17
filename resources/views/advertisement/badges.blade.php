@@ -1,4 +1,4 @@
-<a href="{{ route('category.show',$advertisement->category) }}" class="unstyled">
+<a href="@if($advertisement->isCategorized()){{ route('category.show',$advertisement->category) }}@else {{ route('uncategorized.advertisements') }} @endif" class="unstyled">
     <span class="badge rounded-pill bg-primary mb-2">
         {{ $advertisement->getCategory() }}
     </span>

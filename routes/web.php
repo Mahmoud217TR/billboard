@@ -26,4 +26,6 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/search', [SearchController::class,'indexSearch'])->name('search');
 
 Route::resource('advertisement', AdvertisementController::class);
+Route::get('/uncategorized/advertisements', [AdvertisementController::class,'uncategorized'])->name('uncategorized.advertisements');
+
 Route::resource('category', CategoryController::class);

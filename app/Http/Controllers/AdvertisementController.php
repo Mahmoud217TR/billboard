@@ -26,6 +26,11 @@ class AdvertisementController extends Controller
         return view('advertisement.index',compact('advertisements'));
     }
 
+    public function uncategorized(){
+        $advertisements = Advertisement::featuredFirst()->uncategorized()->latest()->paginate(18);
+        return view('advertisement.index',compact('advertisements'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

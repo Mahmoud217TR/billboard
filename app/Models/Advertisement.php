@@ -96,4 +96,8 @@ class Advertisement extends Model
         }
         return "Uncategorized";
     }
+
+    public function isCategorized(){
+        return $this->category!=null;
+    }
 }
