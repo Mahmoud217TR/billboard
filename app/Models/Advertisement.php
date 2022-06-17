@@ -16,6 +16,7 @@ class Advertisement extends Model
         'state',
         'user_id',
         'category_id',
+        'featured',
     ];
 
     protected $attributes = [

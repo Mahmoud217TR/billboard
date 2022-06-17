@@ -17,7 +17,7 @@
                         @include('advertisement.form')
                         <div class="row">
                             <div class="col-md-6 offset-md-4">
-                                <button class="btn btn-primary">Update</button>
+                                <button class="btn btn-dark">Update</button>
                             </div>
                         </div>
                     </form>

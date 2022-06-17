@@ -56,7 +56,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $advertisements = Advertisement::inCategory($category)->featuredFirst()->latest()->paginate(9);
+        $advertisements = Advertisement::inCategory($category)->featuredFirst()->published()->latest()->paginate(9);
         return view('categories.show',compact('category','advertisements'));
     }
 

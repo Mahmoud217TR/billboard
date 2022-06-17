@@ -28,7 +28,7 @@ class AdvertisementController extends Controller
     }
 
     public function uncategorized(){
-        $advertisements = Advertisement::featuredFirst()->uncategorized()->latest()->paginate(18);
+        $advertisements = Advertisement::featuredFirst()->published()->uncategorized()->latest()->paginate(18);
         return view('advertisement.index',compact('advertisements'));
     }
 

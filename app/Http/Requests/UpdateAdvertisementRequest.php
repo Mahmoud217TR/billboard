@@ -28,6 +28,7 @@ class UpdateAdvertisementRequest extends FormRequest
             'description' => 'nullable|string',
             'state' => 'nullable',
             'category_id' => 'nullable|numeric|exists:categories,id',
+            'featured' => 'nullable|boolean',
         ];
     }
 }

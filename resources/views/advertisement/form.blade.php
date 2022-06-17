@@ -53,3 +53,26 @@
         @enderror
     </div>
 </div>
+@if (auth()->user()->isAdmin())
+<div class="row mb-3">
+    <div class="col-md-6 offset-md-4">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="featured" id="featured" value="1" @checked($advertisement->featured)>
+            <label class="form-check-label" for="featured">
+              Featured
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="featured" id="unfeatured" value="0"  @checked(!$advertisement->featured)>
+            <label class="form-check-label" for="unfeatured">
+              Unfeatured
+            </label>
+        </div>
+        @error('featured')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+@endif
