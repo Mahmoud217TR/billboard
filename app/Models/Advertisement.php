@@ -49,6 +49,10 @@ class Advertisement extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function tags(){
+        return $this->belongsToMany(Tag::class);
+    }
+
     // Scopes
     public function scopeDraft($query){
         return $query->where('state','1');
