@@ -5,10 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Advertisement extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
+
+    public function toSearchableArray(){
+        return [
+            'title' => $this->title, 
+            'description' => $this->description,
+            'author' => $this->user->name,
+        ];
+    }
 
     protected $fillable = [
         'title',
