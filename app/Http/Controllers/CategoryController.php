@@ -22,7 +22,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::withCount('advertisements')->orderBy('name')->paginate(30);
-        return view('categories.index',compact('categories'));
+        return view('category.index',compact('categories'));
     }
 
     /**
@@ -33,7 +33,7 @@ class CategoryController extends Controller
     public function create()
     {
         $this->authorize('create', Category::class);
-        return view('categories.create',['category' => new Category]);
+        return view('category.create',['category' => new Category]);
     }
 
     /**
@@ -57,7 +57,7 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         $advertisements = Advertisement::inCategory($category)->featuredFirst()->published()->latest()->paginate(9);
-        return view('categories.show',compact('category','advertisements'));
+        return view('category.show',compact('category','advertisements'));
     }
 
     /**
@@ -69,7 +69,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         $this->authorize('update',$category);
-        return view('categories.edit',compact('category'));
+        return view('category.edit',compact('category'));
     }
 
     /**

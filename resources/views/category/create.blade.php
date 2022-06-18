@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit '.$category->name)
+@section('title', 'New Category')
 
 @section('content')
     <div class="container">
@@ -9,18 +9,17 @@
                 <div class="card">
                     <div class="card-header">
                         <h1 class="card-title mb-0">
-                            Edit {{ $category->name }}
+                            Create a new Category
                         </h1>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('category.update',$category) }}" method="post">
+                        <form action="{{ route('category.store') }}" method="post">
                             @csrf
-                            @method('PATCH')
-                            @include('categories.form')
+                            @include('category.form')
                             <div class="row mb-3">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-dark">
-                                        Update
+                                        Create
                                     </button>
                                 </div>
                             </div>

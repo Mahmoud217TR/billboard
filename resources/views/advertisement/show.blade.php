@@ -37,6 +37,15 @@
                             @endcan
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class="mb-0 text-bold">
+                                @foreach ($advertisement->tags as $tag)
+                                    <a class="unstyled" href="{{ route('tag.show',$tag) }}">#{{ $tag->name }}</a> 
+                                @endforeach
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-footer row text-muted">
                     <p class="col-md mb-0">Author: {{ $advertisement->user->name }}</p>

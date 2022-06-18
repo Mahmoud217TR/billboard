@@ -4,6 +4,7 @@ use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,3 +30,5 @@ Route::resource('advertisement', AdvertisementController::class);
 Route::get('/uncategorized/advertisements', [AdvertisementController::class,'uncategorized'])->name('uncategorized.advertisements');
 
 Route::resource('category', CategoryController::class);
+
+Route::resource('tag', TagController::class);
