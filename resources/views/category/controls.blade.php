@@ -1,4 +1,4 @@
-<div class="d-flex">
+<div class="d-flex mb-2">
     @can('update',$category)
         <a href="{{ route('category.edit',$category) }}" class="btn btn-success me-2">Edit</a>
     @endcan

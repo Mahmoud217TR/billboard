@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tag;
 use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
+use App\Models\Advertisement;
 
 class TagController extends Controller
 {
@@ -47,7 +48,8 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        //
+        $advertisements = $tag->advertisements()->featuredFirst()->published()->latest()->paginate(9);
+        return view('tag.show',compact('tag','advertisements'));
     }
 
     /**

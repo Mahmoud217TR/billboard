@@ -53,7 +53,7 @@ class TagPolicy
      */
     public function update(User $user, Tag $tag)
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
