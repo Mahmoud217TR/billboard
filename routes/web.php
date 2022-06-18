@@ -25,6 +25,7 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/search', [SearchController::class,'indexSearch'])->name('search');
+Route::get('/searchtag', [SearchController::class,'tagSearch'])->name('search.tag');
 
 Route::resource('advertisement', AdvertisementController::class);
 Route::get('/uncategorized/advertisements', [AdvertisementController::class,'uncategorized'])->name('uncategorized.advertisements');

@@ -11303,3 +11303,8 @@ textarea.form-control-lg {
 .unstyled {
   text-decoration: none;
 }
+
+.prediction-box {
+  position: absolute;
+  width: 94%;
+}
