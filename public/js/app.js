@@ -22782,7 +22782,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['searchUrl', 'addUrl'],
+  props: ['searchUrl', 'addUrl', 'oldTags'],
+  mounted: function mounted() {
+    var oldTagsObject = JSON.parse(this.oldTags);
+    this.pushOldTagsToTagList(oldTagsObject);
+  },
   data: function data() {
     return {
       show: false,
@@ -22818,6 +22822,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.value = this.$refs.tagSearch.value.toLowerCase();
+      console.log(this.getTagsId());
       axios.get(this.searchUrl, {
         params: {
           keyword: this.value,
@@ -22853,18 +22858,12 @@ __webpack_require__.r(__webpack_exports__);
       axios.post(this.addUrl, {
         name: this.value
       }).then(function (response) {
-        _this2.tagList.push({
-          id: response.data['id'],
-          name: response.data['name']
-        });
+        _this2.addToTagList(response.data['id'], response.data['name']);
       });
       this.clearItemsAndInput();
     },
     addTag: function addTag(index) {
-      this.tagList.push({
-        id: index,
-        name: this.items[index]
-      });
+      this.addToTagList(index, this.items[index]);
       this.clearItemsAndInput();
     },
     clearItemsAndInput: function clearItemsAndInput() {
@@ -22876,6 +22875,17 @@ __webpack_require__.r(__webpack_exports__);
     removeTag: function removeTag(index) {
       this.tagList = this.tagList.filter(function (tag) {
         return tag.id !== index;
+      });
+    },
+    pushOldTagsToTagList: function pushOldTagsToTagList(oldTagsObject) {
+      for (var id in oldTagsObject) {
+        this.addToTagList(id, oldTagsObject[id]);
+      }
+    },
+    addToTagList: function addToTagList(id, name) {
+      this.tagList.push({
+        id: id,
+        name: name
       });
     }
   }

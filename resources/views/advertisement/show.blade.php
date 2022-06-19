@@ -32,7 +32,7 @@
                         <div class="col">
                             <p class="mb-0 text-bold">
                                 @foreach ($advertisement->tags as $tag)
-                                    <a class="unstyled" href="{{ route('tag.show',$tag) }}">#{{ $tag->name }}</a> 
+                                    <a class="unstyled me-2" href="{{ route('tag.show',$tag) }}">#{{ $tag->name }}</a> 
                                 @endforeach
                             </p>
                         </div>

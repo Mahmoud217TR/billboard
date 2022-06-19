@@ -24,7 +24,12 @@ class SearchController extends Controller
 
     public function tagSearch(){
         $keyword = request()->get('keyword');
-        $results = Tag::where('name','like',$keyword.'%')->limit(6)->pluck('name','id');
+        $exclude = request()->get('exclude');
+        $results = Tag::where('name','like',$keyword.'%')
+        ->when($exclude, function($query) use ($exclude){
+            $query->whereNotIn('id', $exclude);
+        })
+        ->limit(6)->pluck('name','id');
         $match = $results->contains($keyword);
         return ['results'=>$results, 'match'=>$match];
     }

@@ -52,8 +52,8 @@ class AdvertisementController extends Controller
      */
     public function store(StoreAdvertisementRequest $request)
     {
-        dd($request->all());
         $advertisement = auth()->user()->advertisements()->save(new Advertisement($request->all()));
+        $advertisement->tags()->sync($request->tags);
         return redirect()->route('advertisement.show',$advertisement);
     }
 
@@ -78,6 +78,7 @@ class AdvertisementController extends Controller
     public function edit(Advertisement $advertisement)
     {
         $this->authorize('update',$advertisement);
+        $advertisement->with('tags');
         $categories = Category::all();
         return view('advertisement.edit',compact('advertisement','categories'));
     }
@@ -93,6 +94,7 @@ class AdvertisementController extends Controller
     {
         $this->authorize('update',$advertisement);
         $advertisement->update($request->all());
+        $advertisement->tags()->sync($request->tags);
         return redirect()->route('advertisement.show',$advertisement);
     }
 

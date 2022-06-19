@@ -36,7 +36,11 @@
 
 <script>
     export default {
-        props: ['searchUrl','addUrl'],
+        props: ['searchUrl','addUrl', 'oldTags'],
+        mounted() {
+            const oldTagsObject = JSON.parse(this.oldTags);
+            this.pushOldTagsToTagList(oldTagsObject);
+        },
         data() {
             return {
                 show: false,
@@ -77,6 +81,7 @@
 
             search(){
                 this.value = this.$refs.tagSearch.value.toLowerCase()
+                console.log(this.getTagsId())
                 axios.get(this.searchUrl,{params: {keyword:this.value, exclude: this.getTagsId()}}).then(response =>{
                     this.items = response.data['results'];
                     this.shouldCreate(response.data['match'])
@@ -105,13 +110,13 @@
 
             createTag(){
                 axios.post(this.addUrl,{name: this.value}).then(response => {
-                    this.tagList.push({id: response.data['id'], name: response.data['name']})
+                    this.addToTagList(response.data['id'], response.data['name']);
                 });
                 this.clearItemsAndInput();
             },
 
             addTag(index){
-                this.tagList.push({id: index, name: this.items[index]});
+                this.addToTagList(index, this.items[index]);
                 this.clearItemsAndInput();
             },
 
@@ -125,6 +130,16 @@
             removeTag(index){
                 this.tagList = this.tagList.filter(tag => tag.id !== index);
             },
+
+            pushOldTagsToTagList(oldTagsObject){
+                for(const id in oldTagsObject){
+                    this.addToTagList(id, oldTagsObject[id]);
+                }
+            },
+
+            addToTagList(id, name){
+                this.tagList.push({id: id, name: name});
+            }
 
         },
     }

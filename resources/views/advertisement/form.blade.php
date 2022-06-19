@@ -25,7 +25,8 @@
 <div class="row">
     <label class="col-md-4 col-form-label text-end" for="tag-input">Tags:</label>
     <div class="col-md-4">
-        <search-component search-url='{{ route('search.tag') }}' add-url="{{ route('tag.store') }}"></search-component>
+        <search-component search-url='{{ route('search.tag') }}' add-url="{{ route('tag.store') }}"
+        old-tags="{{ $advertisement->tags->pluck('name','id') }}"></search-component>
     </div>
 </div>
 <div class="row">
