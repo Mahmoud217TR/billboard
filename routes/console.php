@@ -18,7 +18,6 @@ const MODELS_PATH = "App\Models\\";
 const SCOUT_MODELS = [
     "User",
     "Advertisement",
-    "Category",
     "Tag",
 ];
 

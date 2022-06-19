@@ -16,7 +16,13 @@ class Advertisement extends Model
             'title' => $this->title, 
             'description' => $this->description,
             'author' => $this->user->name,
+            'category.name' => $this->category->name,
+            'category.description' => $this->category->description,
         ];
+    }
+
+    public function shouldBeSearchable(){
+        return $this->isPublished();
     }
 
     protected $fillable = [
