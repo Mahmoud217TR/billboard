@@ -15,7 +15,7 @@
                         @csrf
                         @method('patch')
                         @include('advertisement.form')
-                        <div class="row">
+                        <div class="row mt-3">
                             <div class="col-md-6 offset-md-4">
                                 <button class="btn btn-dark">Update</button>
                             </div>

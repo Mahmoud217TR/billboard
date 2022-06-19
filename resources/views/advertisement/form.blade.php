@@ -22,7 +22,31 @@
         @enderror
     </div>
 </div>
-<div class="row mb-3">
+<div class="row">
+    <label class="col-md-4 col-form-label text-end" for="tag-input">Tags:</label>
+    <div class="col-md-4">
+        <search-component search-url='{{ route('search.tag') }}' add-url="{{ route('tag.store') }}"></search-component>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        @error('tags.')
+            <span class="text-danger" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        @error('tags.*')
+            <span class="text-danger" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+<div class="row my-3">
     <label class="col-md-4 col-form-label text-end" for="state">State:</label>
     <div class="col-md-2">
         <select class="form-select" name="state" id="state">
@@ -76,14 +100,3 @@
     </div>
 </div>
 @endif
-<div class="row mb-3">
-    <label class="col-md-4 col-form-label text-end" for="tags">Tags:</label>
-    <div class="col-md-4">
-        <search-component url='{{ route('search.tag') }}'></search-component>
-        @error('tags')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-    </div>
-</div>

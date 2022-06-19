@@ -52,6 +52,7 @@ class AdvertisementController extends Controller
      */
     public function store(StoreAdvertisementRequest $request)
     {
+        dd($request->all());
         $advertisement = auth()->user()->advertisements()->save(new Advertisement($request->all()));
         return redirect()->route('advertisement.show',$advertisement);
     }

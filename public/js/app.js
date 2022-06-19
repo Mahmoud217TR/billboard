@@ -22782,13 +22782,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['url'],
+  props: ['searchUrl', 'addUrl'],
   data: function data() {
     return {
       show: false,
       create: false,
       value: '',
-      items: []
+      items: [],
+      tagList: []
     };
   },
   methods: {
@@ -22816,15 +22817,21 @@ __webpack_require__.r(__webpack_exports__);
     search: function search() {
       var _this = this;
 
-      this.value = this.$refs.tagSearch.value;
-      axios.get(this.url, {
+      this.value = this.$refs.tagSearch.value.toLowerCase();
+      axios.get(this.searchUrl, {
         params: {
-          keyword: this.value
+          keyword: this.value,
+          exclude: this.getTagsId()
         }
       }).then(function (response) {
         _this.items = response.data['results'];
 
         _this.shouldCreate(response.data['match']);
+      });
+    },
+    getTagsId: function getTagsId() {
+      return this.tagList.map(function (tag) {
+        return tag.id;
       });
     },
     shouldCreate: function shouldCreate(condition) {
@@ -22839,6 +22846,37 @@ __webpack_require__.r(__webpack_exports__);
     },
     enableCreate: function enableCreate() {
       this.create = true;
+    },
+    createTag: function createTag() {
+      var _this2 = this;
+
+      axios.post(this.addUrl, {
+        name: this.value
+      }).then(function (response) {
+        _this2.tagList.push({
+          id: response.data['id'],
+          name: response.data['name']
+        });
+      });
+      this.clearItemsAndInput();
+    },
+    addTag: function addTag(index) {
+      this.tagList.push({
+        id: index,
+        name: this.items[index]
+      });
+      this.clearItemsAndInput();
+    },
+    clearItemsAndInput: function clearItemsAndInput() {
+      this.items = [];
+      this.$refs.tagSearch.value = "";
+      this.value = '';
+      this.disableCreate();
+    },
+    removeTag: function removeTag(index) {
+      this.tagList = this.tagList.filter(function (tag) {
+        return tag.id !== index;
+      });
     }
   }
 });
@@ -22867,42 +22905,64 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "col position-relative"
 };
-var _hoisted_4 = {
+var _hoisted_4 = ["value"];
+var _hoisted_5 = {
   key: 0,
   "class": "prediction-box round p-2"
 };
-var _hoisted_5 = {
+var _hoisted_6 = {
   "class": "list-group"
 };
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)();
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)();
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "text-muted fw-normal"
 }, "Create Tag", -1
 /* HOISTED */
 );
 
-var _hoisted_8 = ["id", "onMouseenter", "onMouseleave"];
+var _hoisted_9 = ["id", "onMouseenter", "onMouseleave", "onMousedown"];
+var _hoisted_10 = {
+  "class": "row"
+};
+var _hoisted_11 = {
+  "class": "col"
+};
+var _hoisted_12 = {
+  "class": "my-1"
+};
+var _hoisted_13 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.tagList, function (tag) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
+      id: "tags",
+      name: "tags[]",
+      hidden: "",
+      type: "text",
+      value: tag.id
+    }, null, 8
+    /* PROPS */
+    , _hoisted_4);
+  }), 256
+  /* UNKEYED_FRAGMENT */
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "form-control",
     type: "text",
-    id: "tags",
-    name: "tags[]",
     onFocus: _cache[0] || (_cache[0] = function ($event) {
       return $options.showPredBox();
     }),
     onBlur: _cache[1] || (_cache[1] = function ($event) {
       return $options.hidePredBox();
     }),
+    id: "tag-input",
     ref: "tagSearch",
     onKeyup: _cache[2] || (_cache[2] = function ($event) {
       return $options.search();
     })
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  ), $data.show ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_5, [$data.create ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
+  ), $data.show ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_6, [$data.create ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
     key: 0,
     href: "#",
     "class": "list-group-item list-group-item-action fw-bold d-flex justify-content-between",
@@ -22912,10 +22972,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     onMouseleave: _cache[4] || (_cache[4] = function ($event) {
       return $options.unActive('predbox-create');
+    }),
+    onMousedown: _cache[5] || (_cache[5] = function ($event) {
+      return $options.createTag();
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "#" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.value), 1
   /* TEXT */
-  ), _hoisted_6, _hoisted_7], 32
+  ), _hoisted_7, _hoisted_8], 32
   /* HYDRATE_EVENTS */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.items, function (item, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
@@ -22927,13 +22990,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       },
       onMouseleave: function onMouseleave($event) {
         return $options.unActive('predbox-' + index);
+      },
+      onMousedown: function onMousedown($event) {
+        return $options.addTag(index);
       }
     }, " #" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item), 41
     /* TEXT, PROPS, HYDRATE_EVENTS */
-    , _hoisted_8);
+    , _hoisted_9);
   }), 256
   /* UNKEYED_FRAGMENT */
-  ))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]);
+  ))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_12, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.tagList, function (tag) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
+      href: "#",
+      "class": "fw-bold me-1 d-block unstyled text-primary",
+      onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+        return $options.removeTag(tag.id);
+      }, ["prevent"])
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(tag.name) + "× ", 9
+    /* TEXT, PROPS */
+    , _hoisted_13);
+  }), 256
+  /* UNKEYED_FRAGMENT */
+  ))])])])]);
 }
 
 /***/ }),

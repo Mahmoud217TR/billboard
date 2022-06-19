@@ -14,7 +14,7 @@
                     <form action="{{ route('advertisement.store') }}" method="post">
                         @csrf
                         @include('advertisement.form')
-                        <div class="row">
+                        <div class="row mt-3">
                             <div class="col-md-6 offset-md-4">
                                 <button class="btn btn-dark">Create</button>
                             </div>

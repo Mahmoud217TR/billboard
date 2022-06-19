@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'user@users.test',
         ]);
         // Creating Advertisments with Users
-        Category::factory(10)->has(Advertisement::factory()->count(3)->has(Tag::factory()->count(2)))
+        Category::factory(5)->has(Advertisement::factory()->count(3)->has(Tag::factory()->count(2)))
         ->has(Advertisement::factory()->featured()->count(1)->has(Tag::factory()->count(2)))->create();
     }
 }
