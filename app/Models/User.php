@@ -30,6 +30,8 @@ class User extends Authenticatable
         return [
             'name' => $this->name, 
             'email' => $this->email,
+            'phone' => $this->profile->phone,
+            'address' => $this->profile->address,
         ];
     }
 
@@ -75,6 +77,10 @@ class User extends Authenticatable
         return $this->hasMany(Advertisement::class);
     }
 
+    public function profile(){
+        return $this->hasOne(Profile::class);
+    }
+
     // Scopes
     public function scopeUser($query){
         return $query->where('role','1');
@@ -91,5 +97,13 @@ class User extends Authenticatable
 
     public function isAdmin(){
         return $this->role == 'admin';
+    }
+
+    // Boot
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            $user->profile()->save(new Profile);
+        });
     }
 }
