@@ -10,26 +10,6 @@ use App\Models\Advertisement;
 class TagController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreTagRequest  $request
@@ -61,7 +41,8 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        $this->authorize('update',$tag);
+        return view('tag.edit',compact('tag'));
     }
 
     /**
@@ -73,7 +54,9 @@ class TagController extends Controller
      */
     public function update(UpdateTagRequest $request, Tag $tag)
     {
-        //
+        $this->authorize('update',$tag);
+        $tag->update($request->all());
+        return redirect()->route('tag.show',$tag);
     }
 
     /**
@@ -84,6 +67,8 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $this->authorize('delete',$tag);
+        $tag->delete();
+        return redirect()->route('billboard');
     }
 }

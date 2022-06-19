@@ -31,5 +31,5 @@ Route::get('/uncategorized/advertisements', [AdvertisementController::class,'unc
 
 Route::resource('advertisement', AdvertisementController::class);
 Route::resource('category', CategoryController::class);
-Route::resource('tag', TagController::class);
-Route::resource('profile', ProfileController::class)->only('show','edit','update');
+Route::resource('tag', TagController::class)->except(['index','create']);
+Route::resource('profile', ProfileController::class)->only(['show','edit','update']);
