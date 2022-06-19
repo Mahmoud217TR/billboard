@@ -21,10 +21,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AdvertisementController::class,'index'])->name('billboard');
 Route::get('/billboard', [AdvertisementController::class,'index'])->name('billboard');
+Route::get('/home', [AdvertisementController::class, 'index'])->name('home');
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/search', [SearchController::class,'indexSearch'])->name('search');
 Route::get('/searchtag', [SearchController::class,'tagSearch'])->name('search.tag');
 Route::get('/uncategorized/advertisements', [AdvertisementController::class,'uncategorized'])->name('uncategorized.advertisements');
