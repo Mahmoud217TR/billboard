@@ -70,6 +70,11 @@
                                     <a class="dropdown-item" href="{{ route('advertisement.create') }}">
                                         Create Advertisement
                                     </a>
+                                    @if (auth()->user()->isAdmin())
+                                        <a class="dropdown-item" href="{{ route('category.create') }}">
+                                            Create Category
+                                        </a>
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('profile.show',auth()->user()->profile) }}">
                                         Profile
                                     </a>
