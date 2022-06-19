@@ -65,7 +65,7 @@ class AdvertisementController extends Controller
      */
     public function show(Advertisement $advertisement)
     {
-        $advertisement->with(['user','category','tags']);
+        $advertisement->with(['user','category','tags','user.profile']);
         return view('advertisement.show',compact('advertisement'));
     }
 

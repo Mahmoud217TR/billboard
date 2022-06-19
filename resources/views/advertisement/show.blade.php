@@ -39,7 +39,11 @@
                     </div>
                 </div>
                 <div class="card-footer row text-muted">
-                    <p class="col-md mb-0">Author: {{ $advertisement->user->name }}</p>
+                    <p class="col-md mb-0">Author: 
+                        <a href="{{ route('profile.show',$advertisement->user->profile) }}" class="unstyled">
+                            {{ $advertisement->user->name }}
+                        </a>
+                    </p>
                     <p class="col-md mb-0 text-md-end">Posted at: {{ $advertisement->created_at }}</p>
                 </div>
             </div>
