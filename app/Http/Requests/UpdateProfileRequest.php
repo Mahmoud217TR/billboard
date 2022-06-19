@@ -12,9 +12,9 @@ class UpdateProfileRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize(Profile $profile)
+    public function authorize()
     {
-        return auth()->user()->isOwner($profile);
+        return true;
     }
 
     /**
@@ -22,7 +22,7 @@ class UpdateProfileRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules(Profile $profile)
+    public function rules()
     {
         return [
             'phone' => 'nullable|numeric',

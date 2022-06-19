@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Profile;
 use App\Http\Requests\StoreProfileRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use Image;
 
 class ProfileController extends Controller
 {
@@ -44,5 +45,16 @@ class ProfileController extends Controller
     {
         $this->authorize('update', $profile);
         $profile->update($request->all());
+        if($request->has('picture')){
+            $path = 'storage/'.$request->picture->store('uploads','public');
+            $this->resizeImage($path);
+            $profile->update(['picture'=>asset($path)]);
+        }
+        return redirect()->route('profile.show',$profile);
+    }
+
+    public function resizeImage($path){
+        $img = Image::make($path);
+        $img->fit(300, 300)->save();
     }
 }

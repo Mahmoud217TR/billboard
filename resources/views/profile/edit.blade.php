@@ -24,7 +24,7 @@
                             <div class="col-md-6">
                                 <input id="phone" type="tel" class="form-control @error('phone') is-invalid @enderror"
                                 name="phone" value="{{ old('phone')??$profile->phone }}" autocomplete="phone"
-                                pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
+                                pattern="[0-9]{10}">
 
                                 @error('address')
                                     <span class="invalid-feedback" role="alert">
